@@ -1,0 +1,22 @@
+@Library('test') _
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                    echo 'Hello World'
+                    String nexusUrl = 'http://192.168.0.139:8081/repository/maven-releases/com/ds/test/0.0.1/test-0.0.1.war'
+                    String username = 'admin'
+                    String password = 'admin'
+                    String target_artifact_name = 'test.war'
+                    artifact_download_nexus(nexusUrl, username, password, target_artifact_name)
+                    
+                }
+                
+            }
+        }
+    }
+}
