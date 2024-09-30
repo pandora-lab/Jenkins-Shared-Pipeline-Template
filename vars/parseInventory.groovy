@@ -53,7 +53,8 @@ def call() {
 
 def parseMasterInventory() {
     // Read the YAML file content using the readYaml step
-    def yamlFilePath = "./Devops/master_inventory.yaml"
+    sh "ls -alR"
+    def yamlFilePath = "${WORKSPACE}/Devops/master_inventory.yaml"
     def yaml = readYaml file: yamlFilePath
 
     // Extract and print servers with env: dev
