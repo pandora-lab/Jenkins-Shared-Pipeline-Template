@@ -1,4 +1,4 @@
 // vars/myPipeline.groovy
-def call(Map config) {
+def call() {
     echo "Hello Gents and ladies"
 }
