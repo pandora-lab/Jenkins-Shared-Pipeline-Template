@@ -1,5 +1,4 @@
 // vars/myPipeline.groovy
-
 import groovy.yaml.YamlSlurper
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -50,33 +49,34 @@ def call() {
             }
         }
     }
-}
 
 
-def parseMasterInventory() {
-    // Path to the YAML file
-    // def yamlFilePath = './Devops/master_inventory.yaml'
+    def parseMasterInventory() {
+        // Path to the YAML file
+        // def yamlFilePath = './Devops/master_inventory.yaml'
 
-    // Read the YAML file content
-    def yamlString = new String(Files.readAllBytes(Paths.get(yamlFilePath)))
+        // Read the YAML file content
+        def yamlString = new String(Files.readAllBytes(Paths.get(yamlFilePath)))
 
-    // Parse the YAML string
-    def yaml = new YamlSlurper().parseText(yamlString)
+        // Parse the YAML string
+        def yaml = new YamlSlurper().parseText(yamlString)
 
-    // Extract and print servers with env: dev
-    yaml.each { entry ->
-        entry.each { key, value ->
-            if (value.env == 'dev') {
-                println "Environment: ${value.env}"
-                value.each { serverKey, serverValue ->
-                    if (serverKey != 'env') {
-                        println "  Name: ${serverValue.name}"
-                        println "  Port: ${serverValue.port}"
-                        println "  Path: ${serverValue.path}"
+        // Extract and print servers with env: dev
+        yaml.each { entry ->
+            entry.each { key, value ->
+                if (value.env == 'dev') {
+                    println "Environment: ${value.env}"
+                    value.each { serverKey, serverValue ->
+                        if (serverKey != 'env') {
+                            println "  Name: ${serverValue.name}"
+                            println "  Port: ${serverValue.port}"
+                            println "  Path: ${serverValue.path}"
+                        }
                     }
                 }
             }
         }
     }
-
 }
+
+
