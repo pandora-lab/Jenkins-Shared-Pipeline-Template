@@ -1,6 +1,6 @@
 -   CAMS_DEV: 
         env: dev
-       dev_cams_2:
+        dev_cams_2:
             name: server_2
             port: 8080
             path: "/opt/jboss/instance2/web-app/app2.war"      
