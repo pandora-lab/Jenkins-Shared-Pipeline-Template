@@ -1,4 +1,5 @@
 // vars/myPipeline.groovy
+
 import groovy.yaml.YamlSlurper
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -49,34 +50,86 @@ def call() {
             }
         }
     }
+}
 
 
-    def parseMasterInventory() {
-        // Path to the YAML file
-        // def yamlFilePath = './Devops/master_inventory.yaml'
+// vars/myPipeline.groovy
+import groovy.yaml.YamlSlurper
+import java.nio.file.Files
+import java.nio.file.Paths
 
-        // Read the YAML file content
-        def yamlString = new String(Files.readAllBytes(Paths.get(yamlFilePath)))
+def yamlFilePath = "./Devops/master_inventory.yaml"
 
-        // Parse the YAML string
-        def yaml = new YamlSlurper().parseText(yamlString)
+def call() {
+    pipeline {
+        agent any
 
-        // Extract and print servers with env: dev
-        yaml.each { entry ->
-            entry.each { key, value ->
-                if (value.env == 'dev') {
-                    println "Environment: ${value.env}"
-                    value.each { serverKey, serverValue ->
-                        if (serverKey != 'env') {
-                            println "  Name: ${serverValue.name}"
-                            println "  Port: ${serverValue.port}"
-                            println "  Path: ${serverValue.path}"
-                        }
+        stages {
+            stage('Checkout') {
+                steps {
+                    echo 'Checking out the code...'
+                    // Add your checkout logic here
+                    parseMasterInventory()
+                }
+            }
+
+            // Uncomment and fill in the necessary logic for these stages
+            /*
+            stage('Build') {
+                steps {
+                    echo 'Building the project...'
+                    // Add your build logic here
+                    sh 'mvn clean package'
+                }
+            }
+
+            stage('Test') {
+                steps {
+                    echo 'Running tests...'
+                    // Add your testing logic here
+                    sh 'mvn test'
+                }
+            }
+
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying the application...'
+                    // Add your deployment logic here
+                    // e.g., sh 'deploy_script.sh'
+                }
+            }
+            */
+        }
+
+        post {
+            always {
+                echo 'Cleaning up...'
+                // Clean up logic
+            }
+        }
+    }
+}
+
+def parseMasterInventory() {
+    // Read the YAML file content
+    def yamlString = new String(Files.readAllBytes(Paths.get(yamlFilePath)))
+
+    // Parse the YAML string
+    def yaml = new YamlSlurper().parseText(yamlString)
+
+    // Extract and print servers with env: dev
+    yaml.each { entry ->
+        entry.each { key, value ->
+            if (value.env == 'dev') {
+                echo "Environment: ${value.env}"
+                value.each { serverKey, serverValue ->
+                    if (serverKey != 'env') {
+                        echo "  Name: ${serverValue.name}"
+                        echo "  Port: ${serverValue.port}"
+                        echo "  Path: ${serverValue.path}"
                     }
                 }
             }
         }
     }
 }
-
-
