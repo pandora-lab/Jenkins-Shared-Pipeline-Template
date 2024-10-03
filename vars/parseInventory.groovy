@@ -10,16 +10,14 @@ def call() {
                 steps {
                     echo 'Checking out the code...'
                     // Add your checkout logic here
-                    serverMap = parseMasterInventory()
+                    serverMap = findServerDetails()
                 }
             }
 
-           
             stage('Checkout manifest file') {
                 steps {
                     echo 'Building the project...'
                     // Add your build logic here
-                    sh 'mvn clean package'
                 }
             }
              // Uncomment and fill in the necessary logic for these stages
@@ -51,11 +49,7 @@ def call() {
     }
 }
 
-def parseManifestFile(masterInventory) {
 
-    
-
-}
 
 def parseMasterInventory() {
     // Read the YAML file content using the readYaml step
@@ -86,4 +80,48 @@ def parseMasterInventory() {
     }
     master_inventory.each { println "$it.key: $it.value" }
     return master_inventory
+}
+
+
+
+def findServerDetails() {
+    def serverDetails = [:]
+    def manifestFilePath = "${WORKSPACE}/Parse_Yaml/manifest.yaml"
+    def inventoryFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
+    def manifestYaml = readYaml file: manifestFilePath
+    def inventoryYaml = readYaml file: inventoryFilePath
+
+    manifestYaml.each { manifestKey, manifestValue ->
+        inventoryYaml.each { apps ->
+            if (apps.containsKey(manifestValue.App)) {
+                println('Inside 1st if loop')
+                apps[manifestValue.App].each { appsKey, appsValue ->
+                    if (manifestValue.Env == appsValue.env) {
+                        println("Reached where i wanted tooo")
+                    }
+                }    
+            }
+        }
+    }
+
+    // // Iterate through the inventory to find details
+    // inventory.each { entry ->
+    //     if (entry.containsKey(app)) {
+    //         entry[app].each { serverInfo ->
+    //             if (serverInfo.env == env) {
+    //                 servers.each { serverAlias ->
+    //                     if (serverInfo.containsKey(serverAlias)) {
+    //                         def server = serverInfo[serverAlias]
+    //                         serverDetails[serverAlias] = [
+    //                             name: server.name,
+    //                             port: server.port,
+    //                             path: server.path
+    //                         ]
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // return serverDetails
 }
