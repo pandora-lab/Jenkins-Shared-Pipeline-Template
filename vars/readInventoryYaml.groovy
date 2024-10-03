@@ -8,14 +8,14 @@ def readInventoryYaml(filePath) {
 
     def devServers = [:] // Initialize an empty map for dev environment
 
-    // Iterate through the inventory and extract dev environment servers
+     // Iterate through the inventory and extract dev environment servers
     inventory.each { envConfig ->
         envConfig.each { envName, config ->
             if (config['env'] == 'dev') { // Access 'env' directly
                 config.each { key, server ->
                     if (key != 'env') { // Skip the 'env' entry
                         devServers[key] = [
-                            name: server['name'], // Access properties directly
+                            name: server['name'], // Access properties using map-style
                             port: server['port'],
                             path: server['path']
                         ]
