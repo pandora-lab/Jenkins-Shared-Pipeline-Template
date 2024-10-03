@@ -1,7 +1,7 @@
 @Library('test')_ 
 
-parseInventory()
-
+def serverMap = parseInventory()
+echo "Server Map: ${serverMap}"
 // Example usage
 // pipeline {
 //     agent any
