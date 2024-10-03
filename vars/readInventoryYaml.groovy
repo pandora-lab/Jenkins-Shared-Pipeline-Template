@@ -15,9 +15,9 @@ def readInventoryYaml(filePath) {
                 config.each { key, server ->
                     if (key != 'env') { // Skip the 'env' entry
                         devServers[key] = [
-                            name: server.name,
-                            port: server.port,
-                            path: server.path
+                            name: server['name'], // Access properties directly
+                            port: server['port'],
+                            path: server['path']
                         ]
                     }
                 }
