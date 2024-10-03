@@ -1,4 +1,4 @@
-@Library('your-shared-library') // If you are using shared libraries, replace with your library
+// If you are using shared libraries, replace with your library
 import org.yaml.snakeyaml.Yaml
 
 def readInventoryYaml(filePath) {
