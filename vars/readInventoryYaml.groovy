@@ -11,7 +11,7 @@ def readInventoryYaml(filePath) {
     // Iterate through the inventory and extract dev environment servers
     inventory.each { envConfig ->
         envConfig.each { envName, config ->
-            if (config.env == 'dev') {
+            if (config['env'] == 'dev') { // Access 'env' directly
                 config.each { key, server ->
                     if (key != 'env') { // Skip the 'env' entry
                         devServers[key] = [
@@ -27,4 +27,3 @@ def readInventoryYaml(filePath) {
 
     return devServers
 }
-
