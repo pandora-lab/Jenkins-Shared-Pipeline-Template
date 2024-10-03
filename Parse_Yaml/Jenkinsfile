@@ -1,7 +1,7 @@
 @Library('test')_ 
 
 def serverMap = parseInventory()
-echo "Server Map: ${serverMap}"
+serverMap.each { println "$it.key: $it.value" }
 // Example usage
 // pipeline {
 //     agent any
