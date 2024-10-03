@@ -54,6 +54,7 @@ def call() {
 def parseMasterInventory() {
     // Read the YAML file content using the readYaml step
     sh "ls -alR"
+    def master_inventory = [:]
     def yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
     def yaml = readYaml file: yamlFilePath
 
@@ -67,6 +68,11 @@ def parseMasterInventory() {
                         echo "  Name: ${serverValue.name}"
                         echo "  Port: ${serverValue.port}"
                         echo "  Path: ${serverValue.path}"
+                        master_inventory.addAll(
+                            [
+                                
+                            ]
+                        )
                     }
                 }
             }
