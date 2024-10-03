@@ -10,11 +10,9 @@ def call() {
                 steps {
                     echo 'Checking out the code...'
                     // Add your checkout logic here
-                    serverMap = parseMasterInventory()
+                    serverMap = findServerDetails()
                 }
             }
-
-           
             stage('Checkout manifest file') {
                 steps {
                     echo 'Building the project...'
