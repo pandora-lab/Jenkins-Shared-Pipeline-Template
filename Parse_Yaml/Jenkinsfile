@@ -1,6 +1,8 @@
 @Library('test')_ 
 
 def serverMap = parseInventory()
+echo " hello "
+println("dhshdlsad")
 serverMap.each { println "$it.key: $it.value" }
 // Example usage
 // pipeline {
