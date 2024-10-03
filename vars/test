@@ -1,0 +1,55 @@
+import groovy.yaml.YamlSlurper
+
+def getServerInfoFromManifest() {
+    // Load the manifest file
+    def manifestFile = readYaml(file: 'manifestfile.yaml')
+    
+    // Extract the required fields
+    def app = manifestFile[0].App
+    def env = manifestFile[0].Env
+    def servers = manifestFile[0].Servers
+    
+    return [app: app, env: env, servers: servers]
+}
+
+def getMasterInventory() {
+    // Load the master inventory file
+    def inventoryFile = readYaml(file: 'master_inventory.yaml')
+    
+    return inventoryFile
+}
+
+def findServerDetails(app, env, servers, inventory) {
+    def serverDetails = [:]
+
+    // Iterate through the inventory to find details
+    inventory.each { entry ->
+        if (entry.containsKey(app)) {
+            entry[app].each { serverInfo ->
+                if (serverInfo.env == env) {
+                    servers.each { serverAlias ->
+                        if (serverInfo.containsKey(serverAlias)) {
+                            def server = serverInfo[serverAlias]
+                            serverDetails[serverAlias] = [
+                                name: server.name,
+                                port: server.port,
+                                path: server.path
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return serverDetails
+}
+
+// Main logic
+def manifest = getServerInfoFromManifest()
+def inventory = getMasterInventory()
+def serverDetails = findServerDetails(manifest.app, manifest.env, manifest.servers, inventory)
+
+// Output the server details
+serverDetails.each { alias, details ->
+    println "Alias: ${alias}, Name: ${details.name}, Port: ${details.port}, Path: ${details.path}"
+}

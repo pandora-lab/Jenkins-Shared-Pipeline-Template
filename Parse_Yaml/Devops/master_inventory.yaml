@@ -1,26 +1,26 @@
--   CAMS_DEV: 
-        env: dev
+-   CAMS: 
+    -   env: dev
         dev_cams_2:
-            name: server_2
+            name: server__dev_2
             port: 8080
             path: "/opt/jboss/instance2/web-app/app2.war"      
         dev_cams_1:
-            name: server_1
+            name: server_dev_1
             port: 8080
             path: "/opt/jboss/instance1/web-app/app1.war"
-    CAMS_QA:
-        env: qa 
-        dev_cams_1:
-            name: server_1
+    
+    -   env: qa 
+        qa_cams_1:
+            name: server_qa_1
             port: 8081
             path: "/opt/jboss/instance1/web-app/app1.war"      
-        dev_cams_2:
-            name: server_2
+        qa_cams_2:
+            name: server_qa_2
             port: 8081
             path: "/opt/jboss/instance2/web-app/app2.war"
-    CAMS_PROD: 
-        env: prod
-        dev_cams_1:
-            name: server_1
+    
+    -   env: prod
+        prd_cams_1:
+            name: server_prd_1
             port: 8083
             path: "/opt/jboss/instance1/web-app/app1.war"

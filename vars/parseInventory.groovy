@@ -1,29 +1,29 @@
 
 def yamlFilePath = "$WORKSPACE/Parse_Yaml/Devops/master_inventory.yaml"
-
+def serverMap
 def call() {
     pipeline {
         agent any
 
         stages {
-            stage('Checkout') {
+            stage('Checkout Master inventory') {
                 steps {
                     echo 'Checking out the code...'
                     // Add your checkout logic here
-                    parseMasterInventory()
+                    serverMap = parseMasterInventory()
                 }
             }
 
-            // Uncomment and fill in the necessary logic for these stages
-            /*
-            stage('Build') {
+           
+            stage('Checkout manifest file') {
                 steps {
                     echo 'Building the project...'
                     // Add your build logic here
                     sh 'mvn clean package'
                 }
             }
-
+             // Uncomment and fill in the necessary logic for these stages
+            /*
             stage('Test') {
                 steps {
                     echo 'Running tests...'
@@ -49,6 +49,12 @@ def call() {
             }
         }
     }
+}
+
+def parseManifestFile(masterInventory) {
+
+    
+
 }
 
 def parseMasterInventory() {
