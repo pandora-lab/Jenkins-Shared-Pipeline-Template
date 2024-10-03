@@ -1,22 +1,22 @@
 @Library('test')_ 
 
-// parseInventory()
+parseInventory()
 
 // Example usage
-pipeline {
-    agent any
+// pipeline {
+//     agent any
 
-    stages {
-        stage('Read Inventory') {
-            steps {
-                script {
-                    def inventoryFilePath = '$WORKSPACE/Parse_Yaml/Devops/master_inventory.yaml' // Specify the correct path
-                    def serverMap = readInventoryYaml(inventoryFilePath)
+//     stages {
+//         stage('Read Inventory') {
+//             steps {
+//                 script {
+//                     def inventoryFilePath = '$WORKSPACE/Parse_Yaml/Devops/master_inventory.yaml' // Specify the correct path
+//                     def serverMap = readInventoryYaml(inventoryFilePath)
 
-                    // Print the result
-                    echo "Server Map: ${serverMap}"
-                }
-            }
-        }
-    }
-}
+//                     // Print the result
+//                     echo "Server Map: ${serverMap}"
+//                 }
+//             }
+//         }
+//     }
+// }

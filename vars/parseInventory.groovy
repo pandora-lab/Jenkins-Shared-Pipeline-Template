@@ -1,5 +1,5 @@
 
-def yamlFilePath = "./Devops/master_inventory.yaml"
+def yamlFilePath = "$WORKSPACE/Parse_Yaml/Devops/master_inventory.yaml"
 
 def call() {
     pipeline {
@@ -68,14 +68,15 @@ def parseMasterInventory() {
                         echo "  Name: ${serverValue.name}"
                         echo "  Port: ${serverValue.port}"
                         echo "  Path: ${serverValue.path}"
-                        master_inventory.addAll(
-                            [
-                                
-                            ]
-                        )
+                        master_inventory[serverKey] = [
+                            name: serverValue['name'], // Access properties using map-style
+                            port: serverValue['port'],
+                            path: serverValue['path']
+                        ]
                     }
                 }
             }
         }
     }
+    return master_inventory
 }
