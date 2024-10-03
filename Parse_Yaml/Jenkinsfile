@@ -1,6 +1,7 @@
 @Library('test')_ 
 
-parseInventory()
+// parseInventory()
+findServerDetails()
 
 // Example usage
 // pipeline {
