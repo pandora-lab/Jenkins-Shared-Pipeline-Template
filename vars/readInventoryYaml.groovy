@@ -1,5 +1,5 @@
 // If you are using shared libraries, replace with your library
-import org.yaml.snakeyaml.Yaml
+//import org.yaml.snakeyaml.Yaml
 
 def readInventoryYaml(filePath) {
     def yaml = new Yaml()
