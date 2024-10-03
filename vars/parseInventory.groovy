@@ -78,5 +78,6 @@ def parseMasterInventory() {
             }
         }
     }
+    master_inventory.each { println "$it.key: $it.value" }
     return master_inventory
 }
