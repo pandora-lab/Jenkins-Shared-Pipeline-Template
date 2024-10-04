@@ -1,7 +1,7 @@
 @Library('test')_ 
 
 // parseInventory()
-readInventoryYaml()
+parseInventory()
 
 // Example usage
 // pipeline {
