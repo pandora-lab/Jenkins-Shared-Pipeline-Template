@@ -8,9 +8,11 @@ def call() {
         stages {
             stage('Checkout Master inventory') {
                 steps {
-                    echo 'Checking out the code...'
-                    // Add your checkout logic here
-                    serverMap = parseMasterInventory()
+                    script {
+                        echo 'Checking out the code...'
+                        // Add your checkout logic here
+                        serverMap = parseMasterInventory()
+                    }
                 }
             }
 
