@@ -1,4 +1,4 @@
-@Library('test')_  
+@Library('test')_
 pipeline {
     agent any
 
@@ -6,9 +6,9 @@ pipeline {
         stage('Hello') {
             steps {
                 {
-                script {
-                    myPipeline()
-                }
+                    script {
+                        myPipeline()
+                    }
                 }
             }
         }
