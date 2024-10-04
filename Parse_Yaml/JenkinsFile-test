@@ -1,0 +1,16 @@
+@Library('test')_  
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                {
+                  script{
+                    myPipeline()
+                  }
+                }
+            }
+        }
+    }
+}
