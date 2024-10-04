@@ -1,6 +1,5 @@
 import groovy.yaml.YamlSlurper
 def call() {
-    echo "Hello Gents and ladies"
     // Load the YAML file
     def yamlFile = new File("${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yml")
     def yamlContent = yamlFile.text
