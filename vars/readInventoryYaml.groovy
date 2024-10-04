@@ -91,6 +91,7 @@ def findServerDetails() {
 
     manifestYaml.each { manifestKey, manifestValue ->
         inventoryYaml.each { apps ->
+            println(apps)
             if (apps.containsKey(manifestValue.App)) {
                 println('Inside 1st if loop')
                 apps[manifestValue.App].each { appsKey, appsValue ->

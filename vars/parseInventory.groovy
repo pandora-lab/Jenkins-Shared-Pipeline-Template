@@ -10,7 +10,7 @@ def call() {
                 steps {
                     echo 'Checking out the code...'
                     // Add your checkout logic here
-                    serverMap = findServerDetails()
+                    serverMap = parseMasterInventory()
                 }
             }
 
@@ -82,46 +82,3 @@ def parseMasterInventory() {
     return master_inventory
 }
 
-
-
-def findServerDetails() {
-    def serverDetails = [:]
-    def manifestFilePath = "${WORKSPACE}/Parse_Yaml/manifest.yaml"
-    def inventoryFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
-    def manifestYaml = readYaml file: manifestFilePath
-    def inventoryYaml = readYaml file: inventoryFilePath
-
-    manifestYaml.each { manifestKey, manifestValue ->
-        inventoryYaml.each { apps ->
-            if (apps.containsKey(manifestValue.App)) {
-                println('Inside 1st if loop')
-                apps[manifestValue.App].each { appsKey, appsValue ->
-                    if (manifestValue.Env == appsValue.env) {
-                        println("Reached where i wanted tooo")
-                    }
-                }    
-            }
-        }
-    }
-
-    // // Iterate through the inventory to find details
-    // inventory.each { entry ->
-    //     if (entry.containsKey(app)) {
-    //         entry[app].each { serverInfo ->
-    //             if (serverInfo.env == env) {
-    //                 servers.each { serverAlias ->
-    //                     if (serverInfo.containsKey(serverAlias)) {
-    //                         def server = serverInfo[serverAlias]
-    //                         serverDetails[serverAlias] = [
-    //                             name: server.name,
-    //                             port: server.port,
-    //                             path: server.path
-    //                         ]
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // return serverDetails
-}
