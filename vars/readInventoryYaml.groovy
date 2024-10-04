@@ -11,7 +11,7 @@ def call() {
                     script {
                         echo 'Checking out the code...'
                         // Add your checkout logic here
-                        serverMap = findServerDetails()
+                        serverMap = parseMasterInventory()
                     }
                 }
             }

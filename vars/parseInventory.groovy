@@ -59,7 +59,7 @@ def parseMasterInventory() {
     def master_inventory = [:]
     def yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
     def yaml = readYaml file: yamlFilePath
-
+    
     // Extract and print servers with env: dev
     yaml.each { entry ->
         entry.each { key, value ->
