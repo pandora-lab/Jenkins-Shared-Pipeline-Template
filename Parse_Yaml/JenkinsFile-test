@@ -6,9 +6,9 @@ pipeline {
         stage('Hello') {
             steps {
                 {
-                  script{
+                script {
                     myPipeline()
-                  }
+                }
                 }
             }
         }
