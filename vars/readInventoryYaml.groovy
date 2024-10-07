@@ -86,7 +86,7 @@ def call() {
 def parseMasterInventory() {
     // Read the YAML file content using the readYaml step
     def master_inventory = [:]
-    def manifest_yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/manifest.yaml"
+    def manifest_yamlFilePath = "${WORKSPACE}/Parse_Yaml/manifest.yaml"
     def inventory_yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/Inventory.yaml"
     def manifest = readYaml file: manifest_yamlFilePath
     def environment = readYaml file: inventory_yamlFilePath
