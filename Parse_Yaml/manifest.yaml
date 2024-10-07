@@ -1,6 +1,5 @@
-- Env: dev
-  App: CAMS
+- Env: "dev"
+  App: cams
   Servers:
-  - dev_cams_2
-  - dev_cams_1
-  Path : "/opt/jboss/instance1/web-app/app1.war"
+    - dev_cams_1
+    - dev_cams_2

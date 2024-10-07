@@ -51,57 +51,88 @@ def call() {
     }
 }
 
+// def parseMasterInventory() {
+//     // Read the YAML file content using the readYaml step
+    
+//     def master_inventory = [:]
+//     def yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
+//     def yaml = readYaml file: yamlFilePath
+
+//     // Extract and print servers with env: dev
+//     yaml.each { entry ->
+//         entry.each { key, value ->
+//             if (value.env == 'dev') {
+//                 echo "Environment: ${value.env}"
+//                 value.each { serverKey, serverValue ->
+//                     if (serverKey != 'env') {
+//                         echo "  Name: ${serverValue.name}"
+//                         echo "  Port: ${serverValue.port}"
+//                         echo "  Path: ${serverValue.path}"
+//                         master_inventory[serverKey] = [
+//                             name: serverValue['name'], // Access properties using map-style
+//                             port: serverValue['port'],
+//                             path: serverValue['path']
+//                         ]
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     master_inventory.each { println "$it.key: $it.value" }
+//     return master_inventory
+// }
+
+
 def parseMasterInventory() {
     // Read the YAML file content using the readYaml step
-    
     def master_inventory = [:]
-    def yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
-    def yaml = readYaml file: yamlFilePath
-
+    def manifest_yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/manifest.yaml"
+    def inventory_yamlFilePath = "${WORKSPACE}/Parse_Yaml/Devops/Inventory.yaml"
+    def manifest = readYaml file: manifest_yamlFilePath
+    def environment = readYaml file: inventory_yamlFilePath
     // Extract and print servers with env: dev
-    yaml.each { entry ->
-        entry.each { key, value ->
-            if (value.env == 'dev') {
-                echo "Environment: ${value.env}"
-                value.each { serverKey, serverValue ->
-                    if (serverKey != 'env') {
-                        echo "  Name: ${serverValue.name}"
-                        echo "  Port: ${serverValue.port}"
-                        echo "  Path: ${serverValue.path}"
-                        master_inventory[serverKey] = [
-                            name: serverValue['name'], // Access properties using map-style
-                            port: serverValue['port'],
-                            path: serverValue['path']
-                        ]
-                    }
+    manifest.each { manifestList ->
+    environment.each { envKey, envValue ->
+        if (envKey == manifestList.Env) {
+            println("In environment: ${envKey}")
+            def appList = envValue[manifestList.App] // Get the corresponding app list
+
+            appList.each { app ->
+                if (app.alias in manifestList.Servers) {
+                    println("Found server: ${app.alias}")
+                    println("Name: ${app.name}")
+                    println("Port: ${app.port}")
                 }
             }
         }
     }
-    master_inventory.each { println "$it.key: $it.value" }
-    return master_inventory
+}
+    // master_inventory.each { println "$it.key: $it.value" }
+    // return master_inventory
 }
 
-def findServerDetails() {
-    def serverDetails = [:]
-    def manifestFilePath = "${WORKSPACE}/Parse_Yaml/manifest.yaml"
-    def inventoryFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
-    def manifestYaml = readYaml file: manifestFilePath
-    def inventoryYaml = readYaml file: inventoryFilePath
 
-    manifestYaml.each { manifestKey, manifestValue ->
-        inventoryYaml.each { apps ->
-            println(apps)
-            if (apps.containsKey(manifestValue.App)) {
-                println('Inside 1st if loop')
-                apps[manifestValue.App].each { appsKey, appsValue ->
-                    if (manifestValue.Env == appsValue.env) {
-                        println("Reached where i wanted tooo")
-                    }
-                }    
-            }
-        }
-    }
+
+// def findServerDetails() {
+//     def serverDetails = [:]
+//     def manifestFilePath = "${WORKSPACE}/Parse_Yaml/manifest.yaml"
+//     def inventoryFilePath = "${WORKSPACE}/Parse_Yaml/Devops/master_inventory.yaml"
+//     def manifestYaml = readYaml file: manifestFilePath
+//     def inventoryYaml = readYaml file: inventoryFilePath
+
+//     manifestYaml.each { manifestKey, manifestValue ->
+//         inventoryYaml.each { apps ->
+//             println(apps)
+//             if (apps.containsKey(manifestValue.App)) {
+//                 println('Inside 1st if loop')
+//                 apps[manifestValue.App].each { appsKey, appsValue ->
+//                     if (manifestValue.Env == appsValue.env) {
+//                         println("Reached where i wanted tooo")
+//                     }
+//                 }    
+//             }
+//         }
+//     }
 
     // // Iterate through the inventory to find details
     // inventory.each { entry ->

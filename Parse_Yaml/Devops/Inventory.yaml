@@ -1,0 +1,27 @@
+dev:
+    cams:
+        -   alias: dev_cams_2
+            name: server_dev_2
+            port: 8080
+            path: "/opt/jboss/instance2/web-app/app2.war"      
+        -   alias: dev_cams_1
+            name: server_dev_1
+            port: 8080
+            path: "/opt/jboss/instance1/web-app/app1.war"
+    
+qa:
+    cams:
+        -   alias: qa_cams_1
+            name: server_qa_1
+            port: 8081
+            path: "/opt/jboss/instance1/web-app/app1.war"      
+        -   alias: qa_cams_2
+            name: server_qa_2
+            port: 8081
+            path: "/opt/jboss/instance2/web-app/app2.war"
+prod:
+    cams:
+        -   alias: prd_cams_1
+            name: server_prd_1
+            port: 8083
+            path: "/opt/jboss/instance1/web-app/app1.war"
