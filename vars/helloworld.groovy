@@ -4,7 +4,7 @@ def call(String name) {
         script {
             sh "python3 --version"
             sh "ls -alR"
-            sh "python3 Scripts/helloworld.py ${name}"
+            sh "python3 scripts/helloworld.py ${name}"
         }
     }
 }
