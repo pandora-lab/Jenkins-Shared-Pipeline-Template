@@ -1,10 +1,8 @@
-def call(String name) {
-    stages {
-            stage('Hello World') {
-                steps {
-                    script {
-                        echo "Hello ${name}"
-                    }
+def call(String name) {  
+    stage('Hello World') { // Remove "stages" here since it's a single stage
+        steps {
+            script {
+                echo "Hello ${name}"
             }
         }
     }
