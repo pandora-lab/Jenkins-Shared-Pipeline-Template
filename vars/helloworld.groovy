@@ -3,7 +3,7 @@ def call(String name) {
         // Directly place the script here without wrapping it in steps
         script {
             sh "python3 --version"
-            sh "python3 ./Scripts/helloworld.py ${name}"
+            sh "python3 Scripts/helloworld.py ${name}"
         }
     }
 }
