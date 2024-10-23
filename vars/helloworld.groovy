@@ -1,10 +1,12 @@
 def call(String name) {
     stage('Hello World') {
-        // Directly place the script here without wrapping it in steps
-        script {
-            sh "python3 --version"
-            sh "ls -alR"
-            sh "python3 scripts/helloworld.py ${name}"
+        steps {
+            script {
+                // Print Python version
+                sh "python3 --version"
+                // Execute the Python script
+                sh "python3 scripts/helloworld.py ${name}"
+            }
         }
     }
 }
