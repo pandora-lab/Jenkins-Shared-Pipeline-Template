@@ -1,4 +1,4 @@
-def call(String name, String place) {
+def call() {
     stage('Hello World') {
             script {
                 // Print Python version
