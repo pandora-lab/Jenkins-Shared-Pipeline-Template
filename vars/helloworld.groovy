@@ -7,7 +7,7 @@ def call(String name, String place) {
                 // sh "python3 scripts/helloworld.py ${name}"
                 loadPythonScript(name: 'helloworld.py', path: 'com/demo')
 
-                sh "python3 ./helloworld.py name=${name} place=${place}"
+                sh "python3 ./helloworld.py --name=${name} --place=${place}"
             }
     }
 }
