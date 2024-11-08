@@ -18,20 +18,19 @@
 //         }
 //     ]
 // }
-def stages = [] // Define stages as an empty list
-
+def stages = []
 stages << stage('Build') {
-    steps {
+    steps { 
         echo 'Building the application...'
     }
 }
 stages << stage('Test') {
-    steps {
+    steps { 
         echo 'Running tests...'
     }
 }
 stages << stage('Deploy') {
-    steps {
+    steps { 
         echo 'Deploying to environment...'
     }
 }
