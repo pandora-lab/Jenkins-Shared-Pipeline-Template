@@ -18,22 +18,23 @@
 //         }
 //     ]
 // }
-
-def stages = {
-    stage('Build') {
-        steps {
-            echo 'Building the application...'
+def call() {
+    def stages = {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to environment...'
+            }
         }
     }
-    stage('Test') {
-        steps {
-            echo 'Running tests...'
-        }
-    }
-    stage('Deploy') {
-        steps {
-            echo 'Deploying to environment...'
-        }
-    }
+    return stages
 }
-return stages
