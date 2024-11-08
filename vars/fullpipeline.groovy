@@ -18,21 +18,30 @@
 //         }
 //     ]
 // }
-def stages = []
-stages << stage('Build') {
-    steps { 
-        echo 'Building the application...'
-    }
-}
-stages << stage('Test') {
-    steps { 
-        echo 'Running tests...'
-    }
-}
-stages << stage('Deploy') {
-    steps { 
-        echo 'Deploying to environment...'
+// vars/pipelineStages.groovy
+def buildStage() {
+    stage('Build') {
+        steps {
+            echo 'Building the application...'
+            // Add your build commands here
+        }
     }
 }
 
-return stages
+def testStage() {
+    stage('Test') {
+        steps {
+            echo 'Running tests...'
+            // Add your test commands here
+        }
+    }
+}
+
+def deployStage() {
+    stage('Deploy') {
+        steps {
+            echo 'Deploying the application...'
+            // Add your deployment commands here
+        }
+    }
+}
