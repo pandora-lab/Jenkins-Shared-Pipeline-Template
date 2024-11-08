@@ -18,23 +18,22 @@
 //         }
 //     ]
 // }
-def call() {
-    def stages = {
-        stage('Build') {
-            steps {
-                echo 'Building the application...'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying to environment...'
-            }
-        }
+def stages = [] // Define stages as an empty list
+
+stages << stage('Build') {
+    steps {
+        echo 'Building the application...'
     }
-    return stages
 }
+stages << stage('Test') {
+    steps {
+        echo 'Running tests...'
+    }
+}
+stages << stage('Deploy') {
+    steps {
+        echo 'Deploying to environment...'
+    }
+}
+
+return stages
