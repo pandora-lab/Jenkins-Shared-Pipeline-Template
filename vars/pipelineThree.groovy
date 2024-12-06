@@ -2,17 +2,17 @@ def call(Map args = [:]) {
     pipeline {
         agent any
         stages {
-            stage('Call Pipeline One') {
+            stage('Run Pipeline One Stages') {
                 steps {
                     script {
-                        pipelineOne(args.pipelineOne ?: [:])
+                        pipelineOneStages(args.pipelineOne ?: [:])
                     }
                 }
             }
-            stage('Call Pipeline Two') {
+            stage('Run Pipeline Two Stages') {
                 steps {
                     script {
-                        pipelineTwo(args.pipelineTwo ?: [:])
+                        pipelineTwoStages(args.pipelineTwo ?: [:])
                     }
                 }
             }
