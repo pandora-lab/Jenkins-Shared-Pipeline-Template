@@ -2,9 +2,9 @@ def call(Map args = [:]) {
     pipeline {
         agent any
         stages {
-            stage('Pipeline Two') {
+            stage('Pipeline One') {
                 steps {
-                    echo "Running Pipeline Two with arguments: ${args}"
+                    echo "Running Pipeline One with arguments: ${args}"
                 }
             }
         }
